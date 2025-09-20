@@ -1,5 +1,6 @@
 # nonepad
 current version v0.1
+
 a minimalist notepad app written in c#, mainly for personal use.
 it can save and open files, and supports rich text (meaning fonts and colours)
 

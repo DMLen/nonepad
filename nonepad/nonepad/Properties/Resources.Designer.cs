@@ -133,6 +133,16 @@ namespace nonepad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Magnifier {
+            get {
+                object obj = ResourceManager.GetObject("Magnifier", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Page {
             get {
                 object obj = ResourceManager.GetObject("Page", resourceCulture);
@@ -196,6 +206,16 @@ namespace nonepad.Properties {
         internal static System.Drawing.Bitmap Page_save {
             get {
                 object obj = ResourceManager.GetObject("Page_save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Palette {
+            get {
+                object obj = ResourceManager.GetObject("Palette", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

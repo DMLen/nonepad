@@ -74,6 +74,13 @@ namespace nonepad
 
             if (searchIndex >= 0)
             {
+                if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
+                {
+                    //not a whole word, skip this occurrence
+                    searchPos = searchIndex + 1;
+                    findNext();
+                    return;
+                }
                 targetTextBox.Select(searchIndex, searchText.Length);
                 targetTextBox.ScrollToCaret();
                 searchPos = searchIndex + 1;
@@ -92,6 +99,13 @@ namespace nonepad
 
                 if (searchIndex >= 0)
                 {
+                    if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
+                    {
+                        //not a whole word, continue searching from this position
+                        searchPos = searchIndex + 1;
+                        findNext();
+                        return;
+                    }
                     targetTextBox.Select(searchIndex, searchText.Length);
                     targetTextBox.ScrollToCaret();
                     searchPos = searchIndex + 1;
@@ -133,6 +147,13 @@ namespace nonepad
 
             if (searchIndex >= 0)
             {
+                if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
+                {
+                    //not a whole word, continue searching backwards from this position
+                    searchPos = searchIndex;
+                    findPrevious();
+                    return;
+                }
                 targetTextBox.Select(searchIndex, searchText.Length);
                 targetTextBox.ScrollToCaret();
                 searchPos = searchIndex;
@@ -152,6 +173,13 @@ namespace nonepad
 
                 if (searchIndex >= 0)
                 {
+                    if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
+                    {
+                        //not a whole word, continue searching backwards from this position
+                        searchPos = searchIndex;
+                        findPrevious();
+                        return;
+                    }
                     targetTextBox.Select(searchIndex, searchText.Length);
                     targetTextBox.ScrollToCaret();
                     searchPos = searchIndex;
@@ -182,5 +210,26 @@ namespace nonepad
         {
 
         }
+
+        private bool isWholeWord(string text, int startIndex, int length)
+        {
+            //check if chars before and after are separators
+            if (startIndex > 0)
+            {
+                char prevChar = text[startIndex - 1];
+                if (char.IsLetterOrDigit(prevChar) || prevChar == '_') //if not letter/digit/underscore, probably a space
+                    return false;
+            }
+            int endIndex = startIndex + length;
+            if (endIndex < text.Length)
+            {
+                char nextChar = text[endIndex];
+                if (char.IsLetterOrDigit(nextChar) || nextChar == '_')
+                    return false;
+            }
+
+            return true;
+        }
+
     }
 }

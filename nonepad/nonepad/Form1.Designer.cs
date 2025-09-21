@@ -63,6 +63,7 @@
             saveFileDialog1 = new SaveFileDialog();
             fontDialog1 = new FontDialog();
             colorDialog1 = new ColorDialog();
+            editToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -151,7 +152,7 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator4, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, deleteToolStripMenuItem, toolStripSeparator5, selectAllToolStripMenuItem, dateToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator4, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, deleteToolStripMenuItem, toolStripSeparator5, selectAllToolStripMenuItem, dateToolStripMenuItem, editToolStripMenuItem1 });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(49, 24);
             editToolStripMenuItem.Text = "Edit";
@@ -163,7 +164,7 @@
             undoToolStripMenuItem.Image = Properties.Resources.Silk_arrow_undo;
             undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             undoToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Z;
-            undoToolStripMenuItem.Size = new Size(214, 26);
+            undoToolStripMenuItem.Size = new Size(224, 26);
             undoToolStripMenuItem.Text = "Undo";
             undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
             // 
@@ -173,22 +174,22 @@
             redoToolStripMenuItem.Image = Properties.Resources.Silk_arrow_redo;
             redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             redoToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Y;
-            redoToolStripMenuItem.Size = new Size(214, 26);
+            redoToolStripMenuItem.Size = new Size(224, 26);
             redoToolStripMenuItem.Text = "Redo";
             redoToolStripMenuItem.Click += redoToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(211, 6);
+            toolStripSeparator4.Size = new Size(221, 6);
             // 
             // cutToolStripMenuItem
             // 
             cutToolStripMenuItem.Enabled = false;
-            cutToolStripMenuItem.Image = Properties.Resources.Page_red;
+            cutToolStripMenuItem.Image = Properties.Resources.Cut_silk;
             cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             cutToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
-            cutToolStripMenuItem.Size = new Size(214, 26);
+            cutToolStripMenuItem.Size = new Size(224, 26);
             cutToolStripMenuItem.Text = "Cut";
             cutToolStripMenuItem.Click += cutToolStripMenuItem_Click;
             // 
@@ -198,7 +199,7 @@
             copyToolStripMenuItem.Image = Properties.Resources.Page_copy;
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             copyToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.C;
-            copyToolStripMenuItem.Size = new Size(214, 26);
+            copyToolStripMenuItem.Size = new Size(224, 26);
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
@@ -207,7 +208,7 @@
             pasteToolStripMenuItem.Image = Properties.Resources.Page_paste;
             pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             pasteToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.V;
-            pasteToolStripMenuItem.Size = new Size(214, 26);
+            pasteToolStripMenuItem.Size = new Size(224, 26);
             pasteToolStripMenuItem.Text = "Paste";
             pasteToolStripMenuItem.Click += pasteToolStripMenuItem_Click;
             // 
@@ -218,14 +219,14 @@
             deleteToolStripMenuItem.Image = Properties.Resources.Page_delete;
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             deleteToolStripMenuItem.ShortcutKeys = Keys.Delete;
-            deleteToolStripMenuItem.Size = new Size(214, 26);
+            deleteToolStripMenuItem.Size = new Size(224, 26);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(211, 6);
+            toolStripSeparator5.Size = new Size(221, 6);
             // 
             // selectAllToolStripMenuItem
             // 
@@ -233,16 +234,16 @@
             selectAllToolStripMenuItem.Image = Properties.Resources.Page;
             selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             selectAllToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.A;
-            selectAllToolStripMenuItem.Size = new Size(214, 26);
+            selectAllToolStripMenuItem.Size = new Size(224, 26);
             selectAllToolStripMenuItem.Text = "Select All";
             selectAllToolStripMenuItem.Click += selectAllToolStripMenuItem_Click;
             // 
             // dateToolStripMenuItem
             // 
-            dateToolStripMenuItem.Image = Properties.Resources.Calendar_add;
+            dateToolStripMenuItem.Image = Properties.Resources.Date_Silk;
             dateToolStripMenuItem.Name = "dateToolStripMenuItem";
             dateToolStripMenuItem.ShortcutKeys = Keys.F5;
-            dateToolStripMenuItem.Size = new Size(214, 26);
+            dateToolStripMenuItem.Size = new Size(224, 26);
             dateToolStripMenuItem.Text = "Date and Time";
             dateToolStripMenuItem.Click += dateToolStripMenuItem_Click;
             // 
@@ -329,6 +330,12 @@
             saveFileDialog1.Filter = "Rich text files (*.rtf)|*.rtf|Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog1.Title = "Open file";
             // 
+            // editToolStripMenuItem1
+            // 
+            editToolStripMenuItem1.Name = "editToolStripMenuItem1";
+            editToolStripMenuItem1.Size = new Size(224, 26);
+            editToolStripMenuItem1.Text = "Edit";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -383,5 +390,6 @@
         private SaveFileDialog saveFileDialog1;
         private FontDialog fontDialog1;
         private ColorDialog colorDialog1;
+        private ToolStripMenuItem editToolStripMenuItem1;
     }
 }

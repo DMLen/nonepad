@@ -26,7 +26,16 @@ namespace nonepad
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 string path = saveFileDialog1.FileName;
-                mainTextBox.SaveFile(path, RichTextBoxStreamType.RichText);
+                string extension = Path.GetExtension(path).ToLower();
+                if (extension == ".rtf")
+                {
+                    mainTextBox.SaveFile(path, RichTextBoxStreamType.RichText);
+                }
+                else
+                {
+                    mainTextBox.SaveFile(path, RichTextBoxStreamType.PlainText); //avoid markdown embedding issues by using plaintext for non-rtf files
+                }
+                
                 this.Text = Path.GetFileName(path) + " - Nonepad";
                 currentFilePath = path;
             }
@@ -158,7 +167,15 @@ namespace nonepad
         {
             if (!string.IsNullOrEmpty(currentFilePath))
             {
-                mainTextBox.SaveFile(currentFilePath, RichTextBoxStreamType.RichText);
+                string extension = Path.GetExtension(currentFilePath).ToLower();
+                if (extension == ".rtf")
+                {
+                    mainTextBox.SaveFile(currentFilePath, RichTextBoxStreamType.RichText);
+                }
+                else
+                {
+                    mainTextBox.SaveFile(currentFilePath, RichTextBoxStreamType.PlainText);
+                }
             }
             else
             {

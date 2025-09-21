@@ -83,6 +83,26 @@ namespace nonepad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Cut_silk {
+            get {
+                object obj = ResourceManager.GetObject("Cut-silk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Date_Silk {
+            get {
+                object obj = ResourceManager.GetObject("Date-Silk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Disk {
             get {
                 object obj = ResourceManager.GetObject("Disk", resourceCulture);

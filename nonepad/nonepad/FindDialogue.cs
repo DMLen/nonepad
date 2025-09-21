@@ -118,10 +118,10 @@ namespace nonepad
 
             string searchText = searchBox.Text;
             string targetText = targetTextBox.Text;
-            
+
             int searchStart = Math.Max(0, searchPos - searchText.Length - 1);
             int searchIndex;
-            
+
             if (matchCaseBox.Checked)  //searching backwards with lastindexof
             {
                 searchIndex = targetText.LastIndexOf(searchText, searchStart);
@@ -130,7 +130,7 @@ namespace nonepad
             {
                 searchIndex = targetText.LastIndexOf(searchText, searchStart, StringComparison.OrdinalIgnoreCase);
             }
-            
+
             if (searchIndex >= 0)
             {
                 targetTextBox.Select(searchIndex, searchText.Length);
@@ -176,6 +176,11 @@ namespace nonepad
         public void SetTargetTextBox(RichTextBox textBox)
         {
             targetTextBox = textBox;
+        }
+
+        private void FindDialogue_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

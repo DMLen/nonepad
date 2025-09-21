@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindDialogue));
             searchBox = new TextBox();
             matchCaseBox = new CheckBox();
             HighlightBox = new CheckBox();
@@ -38,17 +39,17 @@
             // 
             // searchBox
             // 
-            searchBox.Location = new Point(76, 96);
+            searchBox.Location = new Point(12, 12);
             searchBox.Name = "searchBox";
             searchBox.Size = new Size(286, 27);
             searchBox.TabIndex = 0;
-            searchBox.Text = "Find...";
+            searchBox.WordWrap = false;
             searchBox.TextChanged += searchBox_TextChanged;
             // 
             // matchCaseBox
             // 
             matchCaseBox.AutoSize = true;
-            matchCaseBox.Location = new Point(489, 98);
+            matchCaseBox.Location = new Point(425, 15);
             matchCaseBox.Name = "matchCaseBox";
             matchCaseBox.Size = new Size(107, 24);
             matchCaseBox.TabIndex = 1;
@@ -59,7 +60,7 @@
             // HighlightBox
             // 
             HighlightBox.AutoSize = true;
-            HighlightBox.Location = new Point(368, 98);
+            HighlightBox.Location = new Point(304, 14);
             HighlightBox.Name = "HighlightBox";
             HighlightBox.Size = new Size(115, 24);
             HighlightBox.TabIndex = 3;
@@ -70,7 +71,7 @@
             // wholeWordsBox
             // 
             wholeWordsBox.AutoSize = true;
-            wholeWordsBox.Location = new Point(602, 98);
+            wholeWordsBox.Location = new Point(538, 15);
             wholeWordsBox.Name = "wholeWordsBox";
             wholeWordsBox.Size = new Size(120, 24);
             wholeWordsBox.TabIndex = 4;
@@ -80,7 +81,7 @@
             // 
             // nextButton
             // 
-            nextButton.Location = new Point(152, 147);
+            nextButton.Location = new Point(12, 45);
             nextButton.Name = "nextButton";
             nextButton.Size = new Size(94, 29);
             nextButton.TabIndex = 5;
@@ -90,7 +91,7 @@
             // 
             // previousButton
             // 
-            previousButton.Location = new Point(312, 147);
+            previousButton.Location = new Point(204, 45);
             previousButton.Name = "previousButton";
             previousButton.Size = new Size(94, 29);
             previousButton.TabIndex = 6;
@@ -102,15 +103,23 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(744, 230);
+            ClientSize = new Size(680, 87);
             Controls.Add(previousButton);
             Controls.Add(nextButton);
             Controls.Add(wholeWordsBox);
             Controls.Add(HighlightBox);
             Controls.Add(matchCaseBox);
             Controls.Add(searchBox);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FindDialogue";
-            Text = "FindDialogue";
+            ShowInTaskbar = false;
+            SizeGripStyle = SizeGripStyle.Hide;
+            Text = "Find...";
+            TopMost = true;
+            Load += FindDialogue_Load;
             ResumeLayout(false);
             PerformLayout();
         }

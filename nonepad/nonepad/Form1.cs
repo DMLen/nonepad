@@ -101,6 +101,8 @@ namespace nonepad
                 cutToolStripMenuItem.Enabled = true;
                 selectAllToolStripMenuItem.Enabled = true;
                 findToolStripMenuItem.Enabled = true;
+                replaceToolStripMenuItem.Enabled = true;
+
             }
             else
             {
@@ -110,6 +112,7 @@ namespace nonepad
                 cutToolStripMenuItem.Enabled = false;
                 selectAllToolStripMenuItem.Enabled = false;
                 findToolStripMenuItem.Enabled = false;
+                replaceToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -243,6 +246,23 @@ namespace nonepad
         private void saveFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
+        }
+
+        private void makeUppercaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mainTextBox.SelectedText = mainTextBox.SelectedText.ToUpper();
+        }
+
+        private void makeLowercaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mainTextBox.SelectedText = mainTextBox.SelectedText.ToLower();
+        }
+
+        private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReplaceDialogue replaceDialog = new ReplaceDialogue();
+            replaceDialog.SetTargetTextBox(mainTextBox);
+            replaceDialog.Show();
         }
     }
 }

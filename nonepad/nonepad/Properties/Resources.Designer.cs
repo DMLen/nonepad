@@ -113,6 +113,16 @@ namespace nonepad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Find {
+            get {
+                object obj = ResourceManager.GetObject("Find", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Folder_silk {
             get {
                 object obj = ResourceManager.GetObject("Folder-silk", resourceCulture);
@@ -253,6 +263,16 @@ namespace nonepad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Silk_arrow_left {
+            get {
+                object obj = ResourceManager.GetObject("Silk_arrow_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Silk_arrow_redo {
             get {
                 object obj = ResourceManager.GetObject("Silk_arrow_redo", resourceCulture);
@@ -263,9 +283,29 @@ namespace nonepad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Silk_arrow_right {
+            get {
+                object obj = ResourceManager.GetObject("Silk_arrow_right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Silk_arrow_undo {
             get {
                 object obj = ResourceManager.GetObject("Silk_arrow_undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Style {
+            get {
+                object obj = ResourceManager.GetObject("Style", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,6 +343,26 @@ namespace nonepad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Text_lowercase {
+            get {
+                object obj = ResourceManager.GetObject("Text_lowercase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Text_replace {
+            get {
+                object obj = ResourceManager.GetObject("Text_replace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Text_smallcaps {
             get {
                 object obj = ResourceManager.GetObject("Text_smallcaps", resourceCulture);
@@ -326,6 +386,16 @@ namespace nonepad.Properties {
         internal static System.Drawing.Bitmap Text_underline {
             get {
                 object obj = ResourceManager.GetObject("Text_underline", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Text_uppercase {
+            get {
+                object obj = ResourceManager.GetObject("Text_uppercase", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

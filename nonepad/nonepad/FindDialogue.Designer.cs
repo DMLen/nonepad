@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindDialogue));
             searchBox = new TextBox();
             matchCaseBox = new CheckBox();
-            HighlightBox = new CheckBox();
             wholeWordsBox = new CheckBox();
             nextButton = new Button();
             previousButton = new Button();
@@ -49,7 +48,7 @@
             // matchCaseBox
             // 
             matchCaseBox.AutoSize = true;
-            matchCaseBox.Location = new Point(425, 15);
+            matchCaseBox.Location = new Point(376, 14);
             matchCaseBox.Name = "matchCaseBox";
             matchCaseBox.Size = new Size(107, 24);
             matchCaseBox.TabIndex = 1;
@@ -57,21 +56,10 @@
             matchCaseBox.UseVisualStyleBackColor = true;
             matchCaseBox.CheckedChanged += matchCaseBox_CheckedChanged;
             // 
-            // HighlightBox
-            // 
-            HighlightBox.AutoSize = true;
-            HighlightBox.Location = new Point(304, 14);
-            HighlightBox.Name = "HighlightBox";
-            HighlightBox.Size = new Size(115, 24);
-            HighlightBox.TabIndex = 3;
-            HighlightBox.Text = "Highlight All";
-            HighlightBox.UseVisualStyleBackColor = true;
-            HighlightBox.CheckedChanged += HighlightBox_CheckedChanged;
-            // 
             // wholeWordsBox
             // 
             wholeWordsBox.AutoSize = true;
-            wholeWordsBox.Location = new Point(538, 15);
+            wholeWordsBox.Location = new Point(489, 14);
             wholeWordsBox.Name = "wholeWordsBox";
             wholeWordsBox.Size = new Size(120, 24);
             wholeWordsBox.TabIndex = 4;
@@ -81,21 +69,21 @@
             // 
             // nextButton
             // 
-            nextButton.Location = new Point(12, 45);
+            nextButton.Image = Properties.Resources.Silk_arrow_right;
+            nextButton.Location = new Point(340, 10);
             nextButton.Name = "nextButton";
-            nextButton.Size = new Size(94, 29);
+            nextButton.Size = new Size(30, 30);
             nextButton.TabIndex = 5;
-            nextButton.Text = "Next...";
             nextButton.UseVisualStyleBackColor = true;
             nextButton.Click += nextButton_Click;
             // 
             // previousButton
             // 
-            previousButton.Location = new Point(204, 45);
+            previousButton.Image = Properties.Resources.Silk_arrow_left;
+            previousButton.Location = new Point(304, 10);
             previousButton.Name = "previousButton";
-            previousButton.Size = new Size(94, 29);
+            previousButton.Size = new Size(30, 30);
             previousButton.TabIndex = 6;
-            previousButton.Text = "Previous...";
             previousButton.UseVisualStyleBackColor = true;
             previousButton.Click += previousButton_Click;
             // 
@@ -103,11 +91,10 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(680, 87);
+            ClientSize = new Size(613, 52);
             Controls.Add(previousButton);
             Controls.Add(nextButton);
             Controls.Add(wholeWordsBox);
-            Controls.Add(HighlightBox);
             Controls.Add(matchCaseBox);
             Controls.Add(searchBox);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -126,11 +113,10 @@
 
         #endregion
 
-        private TextBox searchBox;
-        private CheckBox matchCaseBox;
-        private CheckBox HighlightBox;
-        private CheckBox wholeWordsBox;
-        private Button nextButton;
-        private Button previousButton;
+        protected TextBox searchBox;
+        protected CheckBox matchCaseBox;
+        protected CheckBox wholeWordsBox;
+        protected Button nextButton;
+        protected Button previousButton;
     }
 }

@@ -13,44 +13,40 @@ namespace nonepad
 {
     public partial class FindDialogue : Form
     {
-        private RichTextBox targetTextBox;
-        private int searchPos = 0;
+        protected RichTextBox targetTextBox;
+        protected int searchPos = 0;
         public FindDialogue()
         {
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        protected void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        protected void button1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void matchCaseBox_CheckedChanged(object sender, EventArgs e)
+        protected void matchCaseBox_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void searchBox_TextChanged(object sender, EventArgs e)
+        protected void searchBox_TextChanged(object sender, EventArgs e)
         {
             searchPos = 0;
             findNext();
-            if (HighlightBox.Checked)
-            {
-                //HighlightAll();
-            }
         }
 
-        private void nextButton_Click(object sender, EventArgs e)
+        protected void nextButton_Click(object sender, EventArgs e)
         {
             findNext();
         }
 
-        private void findNext()
+        protected void findNext()
         {
             if (searchBox.Text == "")
             {
@@ -117,12 +113,12 @@ namespace nonepad
             }
         }
 
-        private void previousButton_Click(object sender, EventArgs e)
+        protected void previousButton_Click(object sender, EventArgs e)
         {
             findPrevious();
         }
 
-        private void findPrevious()
+        protected void findPrevious()
         {
             if (searchBox.Text == "")
             {
@@ -191,12 +187,12 @@ namespace nonepad
             }
         }
 
-        private void wholeWordsBox_CheckedChanged(object sender, EventArgs e)
+        protected void wholeWordsBox_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void HighlightBox_CheckedChanged(object sender, EventArgs e)
+        protected void HighlightBox_CheckedChanged(object sender, EventArgs e)
         {
 
         }
@@ -206,12 +202,12 @@ namespace nonepad
             targetTextBox = textBox;
         }
 
-        private void FindDialogue_Load(object sender, EventArgs e)
+        protected void FindDialogue_Load(object sender, EventArgs e)
         {
 
         }
 
-        private bool isWholeWord(string text, int startIndex, int length)
+        protected bool isWholeWord(string text, int startIndex, int length)
         {
             //check if chars before and after are separators
             if (startIndex > 0)
@@ -230,6 +226,5 @@ namespace nonepad
 
             return true;
         }
-
     }
 }

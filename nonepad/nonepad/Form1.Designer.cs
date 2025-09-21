@@ -48,6 +48,8 @@
             pasteToolStripMenuItem = new ToolStripMenuItem();
             deleteToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
+            findToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
             selectAllToolStripMenuItem = new ToolStripMenuItem();
             dateToolStripMenuItem = new ToolStripMenuItem();
             fontToolStripMenuItem = new ToolStripMenuItem();
@@ -63,13 +65,14 @@
             saveFileDialog1 = new SaveFileDialog();
             fontDialog1 = new FontDialog();
             colorDialog1 = new ColorDialog();
-            editToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // mainTextBox
             // 
+            mainTextBox.AcceptsTab = true;
             mainTextBox.Dock = DockStyle.Fill;
+            mainTextBox.EnableAutoDragDrop = true;
             mainTextBox.Font = new Font("Consolas", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             mainTextBox.Location = new Point(0, 28);
             mainTextBox.Name = "mainTextBox";
@@ -152,7 +155,7 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator4, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, deleteToolStripMenuItem, toolStripSeparator5, selectAllToolStripMenuItem, dateToolStripMenuItem, editToolStripMenuItem1 });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator4, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, deleteToolStripMenuItem, toolStripSeparator5, findToolStripMenuItem, toolStripSeparator3, selectAllToolStripMenuItem, dateToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(49, 24);
             editToolStripMenuItem.Text = "Edit";
@@ -228,6 +231,21 @@
             toolStripSeparator5.Name = "toolStripSeparator5";
             toolStripSeparator5.Size = new Size(221, 6);
             // 
+            // findToolStripMenuItem
+            // 
+            findToolStripMenuItem.Enabled = false;
+            findToolStripMenuItem.Image = Properties.Resources.Magnifier;
+            findToolStripMenuItem.Name = "findToolStripMenuItem";
+            findToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.F;
+            findToolStripMenuItem.Size = new Size(224, 26);
+            findToolStripMenuItem.Text = "Find";
+            findToolStripMenuItem.Click += findToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(221, 6);
+            // 
             // selectAllToolStripMenuItem
             // 
             selectAllToolStripMenuItem.Enabled = false;
@@ -265,7 +283,7 @@
             // 
             // colourToolStripMenuItem
             // 
-            colourToolStripMenuItem.Image = Properties.Resources.Rainbow;
+            colourToolStripMenuItem.Image = Properties.Resources.Palette;
             colourToolStripMenuItem.Name = "colourToolStripMenuItem";
             colourToolStripMenuItem.Size = new Size(234, 26);
             colourToolStripMenuItem.Text = "Colour";
@@ -330,12 +348,6 @@
             saveFileDialog1.Filter = "Rich text files (*.rtf)|*.rtf|Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialog1.Title = "Open file";
             // 
-            // editToolStripMenuItem1
-            // 
-            editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            editToolStripMenuItem1.Size = new Size(224, 26);
-            editToolStripMenuItem1.Text = "Edit";
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -390,6 +402,7 @@
         private SaveFileDialog saveFileDialog1;
         private FontDialog fontDialog1;
         private ColorDialog colorDialog1;
-        private ToolStripMenuItem editToolStripMenuItem1;
+        private ToolStripMenuItem findToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator3;
     }
 }

@@ -12,7 +12,7 @@ namespace nonepad
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            mainTextBox.HideSelection = false;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace nonepad
                 {
                     mainTextBox.SaveFile(path, RichTextBoxStreamType.PlainText); //avoid markdown embedding issues by using plaintext for non-rtf files
                 }
-                
+
                 this.Text = Path.GetFileName(path) + " - Nonepad";
                 currentFilePath = path;
             }
@@ -92,6 +92,7 @@ namespace nonepad
                 copyToolStripMenuItem.Enabled = true;
                 cutToolStripMenuItem.Enabled = true;
                 selectAllToolStripMenuItem.Enabled = true;
+                findToolStripMenuItem.Enabled = true;
             }
             else
             {
@@ -100,6 +101,7 @@ namespace nonepad
                 copyToolStripMenuItem.Enabled = false;
                 cutToolStripMenuItem.Enabled = false;
                 selectAllToolStripMenuItem.Enabled = false;
+                findToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -216,6 +218,13 @@ namespace nonepad
         private void fontToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindDialogue findDialog = new FindDialogue();
+            findDialog.SetTargetTextBox(mainTextBox); // Pass reference to the main text box
+            findDialog.Show(); // Use Show() instead of ShowDialog() to allow non-modal operation
         }
     }
 }

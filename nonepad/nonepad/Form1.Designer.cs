@@ -167,7 +167,7 @@
             undoToolStripMenuItem.Image = Properties.Resources.Silk_arrow_undo;
             undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             undoToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Z;
-            undoToolStripMenuItem.Size = new Size(224, 26);
+            undoToolStripMenuItem.Size = new Size(214, 26);
             undoToolStripMenuItem.Text = "Undo";
             undoToolStripMenuItem.Click += undoToolStripMenuItem_Click;
             // 
@@ -177,14 +177,14 @@
             redoToolStripMenuItem.Image = Properties.Resources.Silk_arrow_redo;
             redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             redoToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Y;
-            redoToolStripMenuItem.Size = new Size(224, 26);
+            redoToolStripMenuItem.Size = new Size(214, 26);
             redoToolStripMenuItem.Text = "Redo";
             redoToolStripMenuItem.Click += redoToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(221, 6);
+            toolStripSeparator4.Size = new Size(211, 6);
             // 
             // cutToolStripMenuItem
             // 
@@ -192,7 +192,7 @@
             cutToolStripMenuItem.Image = Properties.Resources.Cut_silk;
             cutToolStripMenuItem.Name = "cutToolStripMenuItem";
             cutToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
-            cutToolStripMenuItem.Size = new Size(224, 26);
+            cutToolStripMenuItem.Size = new Size(214, 26);
             cutToolStripMenuItem.Text = "Cut";
             cutToolStripMenuItem.Click += cutToolStripMenuItem_Click;
             // 
@@ -202,7 +202,7 @@
             copyToolStripMenuItem.Image = Properties.Resources.Page_copy;
             copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             copyToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.C;
-            copyToolStripMenuItem.Size = new Size(224, 26);
+            copyToolStripMenuItem.Size = new Size(214, 26);
             copyToolStripMenuItem.Text = "Copy";
             copyToolStripMenuItem.Click += copyToolStripMenuItem_Click;
             // 
@@ -211,7 +211,7 @@
             pasteToolStripMenuItem.Image = Properties.Resources.Page_paste;
             pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
             pasteToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.V;
-            pasteToolStripMenuItem.Size = new Size(224, 26);
+            pasteToolStripMenuItem.Size = new Size(214, 26);
             pasteToolStripMenuItem.Text = "Paste";
             pasteToolStripMenuItem.Click += pasteToolStripMenuItem_Click;
             // 
@@ -222,14 +222,14 @@
             deleteToolStripMenuItem.Image = Properties.Resources.Page_delete;
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             deleteToolStripMenuItem.ShortcutKeys = Keys.Delete;
-            deleteToolStripMenuItem.Size = new Size(224, 26);
+            deleteToolStripMenuItem.Size = new Size(214, 26);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(221, 6);
+            toolStripSeparator5.Size = new Size(211, 6);
             // 
             // findToolStripMenuItem
             // 
@@ -237,14 +237,14 @@
             findToolStripMenuItem.Image = Properties.Resources.Magnifier;
             findToolStripMenuItem.Name = "findToolStripMenuItem";
             findToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.F;
-            findToolStripMenuItem.Size = new Size(224, 26);
+            findToolStripMenuItem.Size = new Size(214, 26);
             findToolStripMenuItem.Text = "Find";
             findToolStripMenuItem.Click += findToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(221, 6);
+            toolStripSeparator3.Size = new Size(211, 6);
             // 
             // selectAllToolStripMenuItem
             // 
@@ -252,7 +252,7 @@
             selectAllToolStripMenuItem.Image = Properties.Resources.Page;
             selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             selectAllToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.A;
-            selectAllToolStripMenuItem.Size = new Size(224, 26);
+            selectAllToolStripMenuItem.Size = new Size(214, 26);
             selectAllToolStripMenuItem.Text = "Select All";
             selectAllToolStripMenuItem.Click += selectAllToolStripMenuItem_Click;
             // 
@@ -261,7 +261,7 @@
             dateToolStripMenuItem.Image = Properties.Resources.Date_Silk;
             dateToolStripMenuItem.Name = "dateToolStripMenuItem";
             dateToolStripMenuItem.ShortcutKeys = Keys.F5;
-            dateToolStripMenuItem.Size = new Size(224, 26);
+            dateToolStripMenuItem.Size = new Size(214, 26);
             dateToolStripMenuItem.Text = "Date and Time";
             dateToolStripMenuItem.Click += dateToolStripMenuItem_Click;
             // 
@@ -342,11 +342,14 @@
             // openFileDialog1
             // 
             openFileDialog1.Filter = "Rich text files (*.rtf)|*.rtf|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.Title = "Open file...";
+            openFileDialog1.FileOk += openFileDialog1_FileOk;
             // 
             // saveFileDialog1
             // 
             saveFileDialog1.Filter = "Rich text files (*.rtf)|*.rtf|Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.Title = "Open file";
+            saveFileDialog1.Title = "Save file...";
+            saveFileDialog1.FileOk += saveFileDialog1_FileOk;
             // 
             // MainForm
             // 

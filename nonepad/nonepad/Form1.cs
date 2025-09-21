@@ -55,7 +55,15 @@ namespace nonepad
                 int position = path.LastIndexOf("\\");
                 string substring = path.Substring(position + 1);
                 this.Text = substring + " - Nonepad";
-                mainTextBox.LoadFile(path, RichTextBoxStreamType.RichText);
+                string extension = Path.GetExtension(path).ToLower();
+                if (extension == ".rtf")
+                {
+                    mainTextBox.LoadFile(path, RichTextBoxStreamType.RichText);
+                }
+                else
+                {
+                    mainTextBox.LoadFile(path, RichTextBoxStreamType.PlainText);
+                }
                 currentFilePath = path;
             }
         }
@@ -225,6 +233,16 @@ namespace nonepad
             FindDialogue findDialog = new FindDialogue();
             findDialog.SetTargetTextBox(mainTextBox); // Pass reference to the main text box
             findDialog.Show(); // Use Show() instead of ShowDialog() to allow non-modal operation
+        }
+
+        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void saveFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }

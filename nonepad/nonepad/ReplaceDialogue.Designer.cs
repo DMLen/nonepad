@@ -34,16 +34,19 @@
             ReplaceInstance = new Button();
             SuspendLayout();
             // 
+            // searchBox
+            // 
+            searchBox.PlaceholderText = "Search for...";
+            // 
             // countLabel
             // 
             countLabel.Location = new Point(504, 46);
-            countLabel.Size = new Size(0, 20);
-            countLabel.Text = "";
             // 
             // replaceBox
             // 
             replaceBox.Location = new Point(12, 43);
             replaceBox.Name = "replaceBox";
+            replaceBox.PlaceholderText = "Replace with...";
             replaceBox.Size = new Size(286, 27);
             replaceBox.TabIndex = 7;
             replaceBox.WordWrap = false;

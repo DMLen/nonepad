@@ -63,6 +63,16 @@ namespace nonepad.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _8ball_spin {
+            get {
+                object obj = ResourceManager.GetObject("8ball_spin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Calendar_add {
             get {
                 object obj = ResourceManager.GetObject("Calendar_add", resourceCulture);
@@ -296,6 +306,16 @@ namespace nonepad.Properties {
         internal static System.Drawing.Bitmap Silk_arrow_undo {
             get {
                 object obj = ResourceManager.GetObject("Silk_arrow_undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sport_8ball {
+            get {
+                object obj = ResourceManager.GetObject("Sport_8ball", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

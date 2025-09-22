@@ -42,6 +42,7 @@
             // 
             searchBox.Location = new Point(12, 12);
             searchBox.Name = "searchBox";
+            searchBox.PlaceholderText = "Search for...";
             searchBox.Size = new Size(286, 27);
             searchBox.TabIndex = 0;
             searchBox.WordWrap = false;

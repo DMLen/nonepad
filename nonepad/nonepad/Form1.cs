@@ -264,5 +264,11 @@ namespace nonepad
             replaceDialog.SetTargetTextBox(mainTextBox);
             replaceDialog.Show();
         }
+
+        private void consultTheMagic8BallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _8Ball eightballDialog = new _8Ball();
+            eightballDialog.Show();
+        }
     }
 }

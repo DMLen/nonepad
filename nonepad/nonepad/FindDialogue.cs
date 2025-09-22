@@ -14,7 +14,8 @@ namespace nonepad
     public partial class FindDialogue : Form
     {
         protected RichTextBox targetTextBox;
-        protected int searchPos = 0;
+        protected List<int> resultIndexes; //indexes from latest search -- returned by KMP_Find
+        protected int idxPos = 0; //current position in result indexes -- to cycle through search results
         public FindDialogue()
         {
             InitializeComponent();
@@ -32,164 +33,153 @@ namespace nonepad
 
         protected void matchCaseBox_CheckedChanged(object sender, EventArgs e)
         {
-
+            searchBox_TextChanged(sender, e); //re-run search on case sensitivity change
         }
 
         protected void searchBox_TextChanged(object sender, EventArgs e)
         {
-            searchPos = 0;
-            findNext();
+            string searchText = targetTextBox.Text;
+            string patternText = searchBox.Text;
+
+            idxPos = 0; //always select first of results on new search
+            int[] foundIndexes = KMP_Find(0, searchText, patternText);
+            //select first index if present
+            if (foundIndexes.Length > 0)
+            {
+                resultIndexes = foundIndexes.ToList();
+                selectWord(idxPos);
+            }
+            else
+            {
+                resultIndexes = null;
+                targetTextBox.Select(0, 0); //clear selection if nothing found
+            }
+        }
+
+        protected void selectWord(int idxPos) {
+            //selectWord(0) == highlight and scroll to first result from search within the editor
+            if (resultIndexes != null)
+            {
+                int foundIndex = resultIndexes[idxPos];
+                targetTextBox.Select(foundIndex, searchBox.Text.Length);
+                targetTextBox.ScrollToCaret();
+            }
         }
 
         protected void nextButton_Click(object sender, EventArgs e)
         {
-            findNext();
+            if (resultIndexes != null && resultIndexes.Count > 0)
+            {
+                idxPos = (idxPos + 1) % resultIndexes.Count;
+                selectWord(idxPos);
+            }
         }
 
-        protected void findNext()
-        {
+        protected int[] KMP_Find(int startPos, string searchText, string patternText) //KMP string search algorithm
+        {//called like KMP_Find(0, "the") //find instances of "the" starting from beginning
+         //returns an array of indexes where the patternText is found within the searchText
             if (searchBox.Text == "")
             {
                 targetTextBox.Select(0, 0);
-                return;
+                return new int[0]; // return empty array
             }
 
-            string searchText = searchBox.Text;
-            string targetText = targetTextBox.Text;
+            // preserve original text for whole-word checks (case-insensitive search still needs original chars)
+            string originalText = searchText;
 
-            int searchIndex;
-
-            if (matchCaseBox.Checked)
+            // respect match-case option: if unchecked, compare lowercase forms
+            if (!matchCaseBox.Checked)
             {
-                searchIndex = targetText.IndexOf(searchText, searchPos);
-            }
-            else
-            {
-                searchIndex = targetText.IndexOf(searchText, searchPos, StringComparison.OrdinalIgnoreCase);
+                searchText = searchText.ToLowerInvariant();
+                patternText = patternText.ToLowerInvariant();
             }
 
-            if (searchIndex >= 0)
+            List<int> foundIndexes = new List<int>(); //store indexes of pattern occurrences
+            int M = patternText.Length;
+            int N = searchText.Length; //searchText what we search in -- string patternText is what we search for
+            int[] lps = new int[M];
+            computeLPS(patternText, M, lps);
+
+            int Pidx = 0; //pattern index, start from beginning
+            int Tidx = startPos; //start from given position of text
+
+            while (Tidx < N)
             {
-                if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
+                if (patternText[Pidx] == searchText[Tidx])
                 {
-                    //not a whole word, skip this occurrence
-                    searchPos = searchIndex + 1;
-                    findNext();
-                    return;
+                    Pidx++;
+                    Tidx++;
                 }
-                targetTextBox.Select(searchIndex, searchText.Length);
-                targetTextBox.ScrollToCaret();
-                searchPos = searchIndex + 1;
-            }
-            else
-            {
-                //not found from current pos, wrap around to start
-                if (matchCaseBox.Checked)
+                if (Pidx == M)
                 {
-                    searchIndex = targetText.IndexOf(searchText, 0);
-                }
-                else
-                {
-                    searchIndex = targetText.IndexOf(searchText, 0, StringComparison.OrdinalIgnoreCase);
-                }
-
-                if (searchIndex >= 0)
-                {
-                    if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
+                    int foundIndex = Tidx - Pidx;
+                    //respect whole-word option
+                    if (wholeWordsBox.Checked)
                     {
-                        //not a whole word, continue searching from this position
-                        searchPos = searchIndex + 1;
-                        findNext();
-                        return;
+                        if (isWholeWord(originalText, foundIndex, M))
+                        {
+                            foundIndexes.Add(foundIndex); //add to return list
+                            System.Diagnostics.Debug.WriteLine("Found whole-word pattern at index " + foundIndex);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("Match at index " + foundIndex + " rejected by whole-word check");
+                        }
                     }
-                    targetTextBox.Select(searchIndex, searchText.Length);
-                    targetTextBox.ScrollToCaret();
-                    searchPos = searchIndex + 1;
-                }
-                else
+                    else
+                    {
+                        foundIndexes.Add(foundIndex); //add to return list
+                        System.Diagnostics.Debug.WriteLine("Found pattern at index " + foundIndex);
+                    }
+
+                    Pidx = lps[Pidx - 1];
+                } //look for next match
+                else if (Tidx < N && patternText[Pidx] != searchText[Tidx])
                 {
-                    targetTextBox.Select(0, 0); //not occurring in document at all
+                    if (Pidx != 0)
+                        Pidx = lps[Pidx - 1];
+                    else
+                        Tidx++;
+                }
+            }
+            System.Diagnostics.Debug.WriteLine("Total occurrences of pattern found: " + foundIndexes.Count);
+            System.Diagnostics.Debug.WriteLine("Occurrences at indexes: " + string.Join(", ", foundIndexes));
+            return foundIndexes.ToArray();
+        }
+
+        protected void computeLPS(string pattern, int M, int[] lps)
+        {
+            int len = 0;
+            int i = 1;
+            lps[0] = 0;
+
+            while (i<M) {
+                if (pattern[i] == pattern[len]) {
+                    len++;
+                    lps[i] = len;
+                    i++;}
+                else {
+                    if (len != 0) {
+                        len = lps[len - 1];}
+                    else {
+                        lps[i] = len;
+                        i++;}
                 }
             }
         }
 
         protected void previousButton_Click(object sender, EventArgs e)
         {
-            findPrevious();
-        }
-
-        protected void findPrevious()
-        {
-            if (searchBox.Text == "")
+            if (resultIndexes != null && resultIndexes.Count > 0)
             {
-                targetTextBox.Select(0, 0);
-                return;
-            }
-
-            string searchText = searchBox.Text;
-            string targetText = targetTextBox.Text;
-
-            int searchStart = Math.Max(0, searchPos - searchText.Length - 1);
-            int searchIndex;
-
-            if (matchCaseBox.Checked)  //searching backwards with lastindexof
-            {
-                searchIndex = targetText.LastIndexOf(searchText, searchStart);
-            }
-            else
-            {
-                searchIndex = targetText.LastIndexOf(searchText, searchStart, StringComparison.OrdinalIgnoreCase);
-            }
-
-            if (searchIndex >= 0)
-            {
-                if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
-                {
-                    //not a whole word, continue searching backwards from this position
-                    searchPos = searchIndex;
-                    findPrevious();
-                    return;
-                }
-                targetTextBox.Select(searchIndex, searchText.Length);
-                targetTextBox.ScrollToCaret();
-                searchPos = searchIndex;
-            }
-            else
-            {
-                //not found before current pos, wrap around to end
-                int documentLength = targetText.Length;
-                if (matchCaseBox.Checked)
-                {
-                    searchIndex = targetText.LastIndexOf(searchText, documentLength);
-                }
-                else
-                {
-                    searchIndex = targetText.LastIndexOf(searchText, documentLength, StringComparison.OrdinalIgnoreCase);
-                }
-
-                if (searchIndex >= 0)
-                {
-                    if (wholeWordsBox.Checked && !isWholeWord(targetText, searchIndex, searchText.Length))
-                    {
-                        //not a whole word, continue searching backwards from this position
-                        searchPos = searchIndex;
-                        findPrevious();
-                        return;
-                    }
-                    targetTextBox.Select(searchIndex, searchText.Length);
-                    targetTextBox.ScrollToCaret();
-                    searchPos = searchIndex;
-                }
-                else
-                {
-                    targetTextBox.Select(0, 0); //not occurring in document at all
-                }
+                idxPos = (idxPos - 1 + resultIndexes.Count) % resultIndexes.Count;
+                selectWord(idxPos);
             }
         }
 
         protected void wholeWordsBox_CheckedChanged(object sender, EventArgs e)
         {
-
+            searchBox_TextChanged(sender, e); //re-run search on whole-word change
         }
 
         protected void HighlightBox_CheckedChanged(object sender, EventArgs e)
@@ -225,6 +215,39 @@ namespace nonepad
             }
 
             return true;
+        }
+
+        private void HighlightBox_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void highlightAllBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (resultIndexes == null || resultIndexes.Count == 0)
+                return;
+            //as far as i know, there's no way to apply highlights to characters in the textbox without first selecting them
+            //workaround to avoid losing user's selection when changing highlight all option
+            int originalSelectionStart = targetTextBox.SelectionStart;
+            int originalSelectionLength = targetTextBox.SelectionLength;
+
+            if (highlightAllBox.Checked)
+            {
+                foreach (int index in resultIndexes)
+                {//apply yellow highlight to found instances
+                    targetTextBox.Select(index, searchBox.Text.Length);
+                    targetTextBox.SelectionBackColor = Color.Yellow;
+                }
+            }
+            else
+            {
+                foreach (int index in resultIndexes)
+                {
+                    targetTextBox.Select(index, searchBox.Text.Length);
+                    targetTextBox.SelectionBackColor = targetTextBox.BackColor;
+                }
+            }
+            targetTextBox.Select(originalSelectionStart, originalSelectionLength);
         }
     }
 }

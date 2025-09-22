@@ -34,6 +34,7 @@
             wholeWordsBox = new CheckBox();
             nextButton = new Button();
             previousButton = new Button();
+            highlightAllBox = new CheckBox();
             SuspendLayout();
             // 
             // searchBox
@@ -87,11 +88,23 @@
             previousButton.UseVisualStyleBackColor = true;
             previousButton.Click += previousButton_Click;
             // 
+            // highlightAllBox
+            // 
+            highlightAllBox.AutoSize = true;
+            highlightAllBox.Location = new Point(615, 14);
+            highlightAllBox.Name = "highlightAllBox";
+            highlightAllBox.Size = new Size(115, 24);
+            highlightAllBox.TabIndex = 7;
+            highlightAllBox.Text = "Highlight All";
+            highlightAllBox.UseVisualStyleBackColor = true;
+            highlightAllBox.CheckedChanged += highlightAllBox_CheckedChanged;
+            // 
             // FindDialogue
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(613, 52);
+            ClientSize = new Size(739, 52);
+            Controls.Add(highlightAllBox);
             Controls.Add(previousButton);
             Controls.Add(nextButton);
             Controls.Add(wholeWordsBox);
@@ -118,5 +131,6 @@
         protected CheckBox wholeWordsBox;
         protected Button nextButton;
         protected Button previousButton;
+        private CheckBox highlightAllBox;
     }
 }

@@ -28,14 +28,14 @@ namespace nonepad
             if (string.IsNullOrEmpty(searchBox.Text))
                 return;
 
-            searchPos = 0;
+            //searchPos = 0;
             //findNext();
 
             //loop while findNext() has a match
             while (targetTextBox.SelectionLength > 0 && !string.IsNullOrEmpty(targetTextBox.SelectedText))
             {
                 targetTextBox.SelectedText = replaceBox.Text;
-                searchPos = targetTextBox.SelectionStart + replaceBox.Text.Length;
+                //searchPos = targetTextBox.SelectionStart + replaceBox.Text.Length;
                 //findNext();
             }
         }

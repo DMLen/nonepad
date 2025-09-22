@@ -14,7 +14,6 @@ namespace nonepad
     public partial class FindDialogue : Form
     {
         protected RichTextBox targetTextBox;
-        protected int searchPos = 0;
         protected List<int> resultIndexes; //indexes from latest search -- returned by KMP_Find
         protected int idxPos = 0; //current position in result indexes -- to cycle through search results
         public FindDialogue()
@@ -39,9 +38,11 @@ namespace nonepad
 
         protected void searchBox_TextChanged(object sender, EventArgs e)
         {
-            searchPos = 0;
-            idxPos = 0;
-            int[] foundIndexes = KMP_Find(0, targetTextBox.Text, searchBox.Text);
+            string searchText = targetTextBox.Text;
+            string patternText = searchBox.Text;
+
+            idxPos = 0; //always select first of results on new search
+            int[] foundIndexes = KMP_Find(0, searchText, patternText);
             //select first index if present
             if (foundIndexes.Length > 0)
                             {
@@ -75,7 +76,8 @@ namespace nonepad
         }
 
         protected int[] KMP_Find(int startPos, string searchText, string patternText) //KMP string search algorithm
-        {//called like KMP_Find(0, "the") //find next instance of the word "the" starting from index 0 of target text box
+        {//called like KMP_Find(0, "the") //find instances of "the" starting from beginning
+        //returns an array of indexes where the patternText is found within the searchText
             if (searchBox.Text == "")
             {
                 targetTextBox.Select(0, 0);

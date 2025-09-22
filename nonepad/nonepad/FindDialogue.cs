@@ -45,7 +45,7 @@ namespace nonepad
             int[] foundIndexes = KMP_Find(0, searchText, patternText);
             //select first index if present
             if (foundIndexes.Length > 0)
-                            {
+            {
                 resultIndexes = foundIndexes.ToList();
                 selectWord(idxPos);
             }
@@ -77,11 +77,21 @@ namespace nonepad
 
         protected int[] KMP_Find(int startPos, string searchText, string patternText) //KMP string search algorithm
         {//called like KMP_Find(0, "the") //find instances of "the" starting from beginning
-        //returns an array of indexes where the patternText is found within the searchText
+         //returns an array of indexes where the patternText is found within the searchText
             if (searchBox.Text == "")
             {
                 targetTextBox.Select(0, 0);
                 return new int[0]; // return empty array
+            }
+
+            // preserve original text for whole-word checks (case-insensitive search still needs original chars)
+            string originalText = searchText;
+
+            // respect match-case option: if unchecked, compare lowercase forms
+            if (!matchCaseBox.Checked)
+            {
+                searchText = searchText.ToLowerInvariant();
+                patternText = patternText.ToLowerInvariant();
             }
 
             List<int> foundIndexes = new List<int>(); //store indexes of pattern occurrences
@@ -103,8 +113,25 @@ namespace nonepad
                 if (Pidx == M)
                 {
                     int foundIndex = Tidx - Pidx;
-                    foundIndexes.Add(foundIndex); //add to return list
-                    System.Diagnostics.Debug.WriteLine("Found pattern at index " + foundIndex);
+                    //respect whole-word option
+                    if (wholeWordsBox.Checked)
+                    {
+                        if (isWholeWord(originalText, foundIndex, M))
+                        {
+                            foundIndexes.Add(foundIndex); //add to return list
+                            System.Diagnostics.Debug.WriteLine("Found whole-word pattern at index " + foundIndex);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine("Match at index " + foundIndex + " rejected by whole-word check");
+                        }
+                    }
+                    else
+                    {
+                        foundIndexes.Add(foundIndex); //add to return list
+                        System.Diagnostics.Debug.WriteLine("Found pattern at index " + foundIndex);
+                    }
+
                     Pidx = lps[Pidx - 1];
                 } //look for next match
                 else if (Tidx < N && patternText[Pidx] != searchText[Tidx])
@@ -188,6 +215,39 @@ namespace nonepad
             }
 
             return true;
+        }
+
+        private void HighlightBox_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void highlightAllBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (resultIndexes == null || resultIndexes.Count == 0)
+                return;
+            //as far as i know, there's no way to apply highlights to characters in the textbox without first selecting them
+            //workaround to avoid losing user's selection when changing highlight all option
+            int originalSelectionStart = targetTextBox.SelectionStart;
+            int originalSelectionLength = targetTextBox.SelectionLength;
+
+            if (highlightAllBox.Checked)
+            {
+                foreach (int index in resultIndexes)
+                {//apply yellow highlight to found instances
+                    targetTextBox.Select(index, searchBox.Text.Length);
+                    targetTextBox.SelectionBackColor = Color.Yellow;
+                }
+            }
+            else
+            {
+                foreach (int index in resultIndexes)
+                {
+                    targetTextBox.Select(index, searchBox.Text.Length);
+                    targetTextBox.SelectionBackColor = targetTextBox.BackColor;
+                }
+            }
+            targetTextBox.Select(originalSelectionStart, originalSelectionLength);
         }
     }
 }

@@ -13,6 +13,8 @@ namespace nonepad
     //inherit functions from FindDialogue
     public partial class ReplaceDialogue : FindDialogue
     {
+        //protected List<int> resultIndexes; //indexes from latest search -- returned by KMP_Find
+        //protected int idxPos = 0; //current position in result indexes -- to cycle through search results
         public ReplaceDialogue()
         {
             InitializeComponent();
@@ -42,10 +44,37 @@ namespace nonepad
 
         private void ReplaceInstance_Click(object sender, EventArgs e) //replace all instances
         {
-            if (targetTextBox.SelectionLength > 0)
+            if (targetTextBox.SelectionLength > 0 && resultIndexes != null && idxPos < resultIndexes.Count)
             {
-                targetTextBox.SelectedText = replaceBox.Text;
-                //findNext();
+                int currentIndex = resultIndexes[idxPos];
+                string searchText = searchBox.Text;
+                string replaceText = replaceBox.Text;
+                int lengthDifference = replaceText.Length - searchText.Length; //calculate difference in length so we can adjust indexes (maintain accuracy of results without needing to re-search)
+                
+                targetTextBox.SelectedText = replaceText;
+                resultIndexes.RemoveAt(idxPos);
+
+                if (lengthDifference != 0)
+                {
+                    for (int i = 0; i < resultIndexes.Count; i++)
+                    {
+                        if (resultIndexes[i] > currentIndex)
+                        {
+                            resultIndexes[i] += lengthDifference;
+                        }
+                    }
+                }
+                
+                //keep idxpos in bounds
+                if (idxPos >= resultIndexes.Count && resultIndexes.Count > 0)
+                {
+                    idxPos = resultIndexes.Count - 1;
+                }
+                
+                if (resultIndexes.Count > 0 && idxPos < resultIndexes.Count)
+                {
+                    selectWord(idxPos);
+                }
             }
         }
     }

@@ -25,20 +25,24 @@ namespace nonepad
 
         }
 
-        private void ReplaceAll_Click(object sender, EventArgs e) //replace current selection
+        private void ReplaceAll_Click(object sender, EventArgs e) //replace all occurrences in document
         {
-            if (string.IsNullOrEmpty(searchBox.Text))
-                return;
-
-            //searchPos = 0;
-            //findNext();
-
-            //loop while findNext() has a match
-            while (targetTextBox.SelectionLength > 0 && !string.IsNullOrEmpty(targetTextBox.SelectedText))
+            if (resultIndexes != null && resultIndexes.Count > 0)
             {
-                targetTextBox.SelectedText = replaceBox.Text;
-                //searchPos = targetTextBox.SelectionStart + replaceBox.Text.Length;
-                //findNext();
+                string searchText = searchBox.Text;
+                string replaceText = replaceBox.Text;
+                
+                //go backwards to avoid need for index adjustment
+                for (int i = resultIndexes.Count - 1; i >= 0; i--)
+                {
+                    int index = resultIndexes[i];
+                    targetTextBox.Select(index, searchText.Length);
+                    targetTextBox.SelectedText = replaceText;
+                }
+                
+                resultIndexes.Clear();
+                idxPos = 0;
+                targetTextBox.Select(0, 0);
             }
         }
 

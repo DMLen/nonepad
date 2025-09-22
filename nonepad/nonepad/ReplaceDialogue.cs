@@ -31,7 +31,7 @@ namespace nonepad
             {
                 string searchText = searchBox.Text;
                 string replaceText = replaceBox.Text;
-                
+
                 //go backwards to avoid need for index adjustment
                 for (int i = resultIndexes.Count - 1; i >= 0; i--)
                 {
@@ -39,10 +39,11 @@ namespace nonepad
                     targetTextBox.Select(index, searchText.Length);
                     targetTextBox.SelectedText = replaceText;
                 }
-                
+
                 resultIndexes.Clear();
                 idxPos = 0;
                 targetTextBox.Select(0, 0);
+                updateCountLabel();
             }
         }
 
@@ -54,7 +55,7 @@ namespace nonepad
                 string searchText = searchBox.Text;
                 string replaceText = replaceBox.Text;
                 int lengthDifference = replaceText.Length - searchText.Length; //calculate difference in length so we can adjust indexes (maintain accuracy of results without needing to re-search)
-                
+
                 targetTextBox.SelectedText = replaceText;
                 resultIndexes.RemoveAt(idxPos);
 
@@ -68,17 +69,18 @@ namespace nonepad
                         }
                     }
                 }
-                
+
                 //keep idxpos in bounds
                 if (idxPos >= resultIndexes.Count && resultIndexes.Count > 0)
                 {
                     idxPos = resultIndexes.Count - 1;
                 }
-                
+
                 if (resultIndexes.Count > 0 && idxPos < resultIndexes.Count)
                 {
                     selectWord(idxPos);
                 }
+                updateCountLabel();
             }
         }
     }

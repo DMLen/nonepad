@@ -34,9 +34,15 @@
             ReplaceInstance = new Button();
             SuspendLayout();
             // 
+            // countLabel
+            // 
+            countLabel.Location = new Point(504, 46);
+            countLabel.Size = new Size(0, 20);
+            countLabel.Text = "";
+            // 
             // replaceBox
             // 
-            replaceBox.Location = new Point(12, 45);
+            replaceBox.Location = new Point(12, 43);
             replaceBox.Name = "replaceBox";
             replaceBox.Size = new Size(286, 27);
             replaceBox.TabIndex = 7;
@@ -75,6 +81,7 @@
             Name = "ReplaceDialogue";
             Text = "Replace...";
             Load += FindDialogue_Load;
+            Controls.SetChildIndex(countLabel, 0);
             Controls.SetChildIndex(replaceBox, 0);
             Controls.SetChildIndex(ReplaceAll, 0);
             Controls.SetChildIndex(ReplaceInstance, 0);

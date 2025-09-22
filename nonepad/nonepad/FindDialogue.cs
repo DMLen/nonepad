@@ -36,6 +36,18 @@ namespace nonepad
             searchBox_TextChanged(sender, e); //re-run search on case sensitivity change
         }
 
+        protected void updateCountLabel()
+        {
+            if (resultIndexes != null && resultIndexes.Count > 0)
+            {
+                countLabel.Text = $"{idxPos+1} of {resultIndexes.Count} matches";
+            }
+            else
+            {
+                countLabel.Text = "No matches found!";
+            }
+        }
+
         protected void searchBox_TextChanged(object sender, EventArgs e)
         {
             string searchText = targetTextBox.Text;
@@ -54,9 +66,11 @@ namespace nonepad
                 resultIndexes = null;
                 targetTextBox.Select(0, 0); //clear selection if nothing found
             }
+            updateCountLabel();
         }
 
-        protected void selectWord(int idxPos) {
+        protected void selectWord(int idxPos)
+        {
             //selectWord(0) == highlight and scroll to first result from search within the editor
             if (resultIndexes != null)
             {
@@ -72,6 +86,7 @@ namespace nonepad
             {
                 idxPos = (idxPos + 1) % resultIndexes.Count;
                 selectWord(idxPos);
+                updateCountLabel();
             }
         }
 
@@ -119,17 +134,17 @@ namespace nonepad
                         if (isWholeWord(originalText, foundIndex, M))
                         {
                             foundIndexes.Add(foundIndex); //add to return list
-                            System.Diagnostics.Debug.WriteLine("Found whole-word pattern at index " + foundIndex);
+                            //System.Diagnostics.Debug.WriteLine("Found whole-word pattern at index " + foundIndex);
                         }
                         else
                         {
-                            System.Diagnostics.Debug.WriteLine("Match at index " + foundIndex + " rejected by whole-word check");
+                            //System.Diagnostics.Debug.WriteLine("Match at index " + foundIndex + " rejected by whole-word check");
                         }
                     }
                     else
                     {
                         foundIndexes.Add(foundIndex); //add to return list
-                        System.Diagnostics.Debug.WriteLine("Found pattern at index " + foundIndex);
+                        //System.Diagnostics.Debug.WriteLine("Found pattern at index " + foundIndex);
                     }
 
                     Pidx = lps[Pidx - 1];
@@ -142,8 +157,8 @@ namespace nonepad
                         Tidx++;
                 }
             }
-            System.Diagnostics.Debug.WriteLine("Total occurrences of pattern found: " + foundIndexes.Count);
-            System.Diagnostics.Debug.WriteLine("Occurrences at indexes: " + string.Join(", ", foundIndexes));
+            //System.Diagnostics.Debug.WriteLine("Total occurrences of pattern found: " + foundIndexes.Count);
+            //System.Diagnostics.Debug.WriteLine("Occurrences at indexes: " + string.Join(", ", foundIndexes));
             return foundIndexes.ToArray();
         }
 
@@ -153,17 +168,25 @@ namespace nonepad
             int i = 1;
             lps[0] = 0;
 
-            while (i<M) {
-                if (pattern[i] == pattern[len]) {
+            while (i < M)
+            {
+                if (pattern[i] == pattern[len])
+                {
                     len++;
                     lps[i] = len;
-                    i++;}
-                else {
-                    if (len != 0) {
-                        len = lps[len - 1];}
-                    else {
+                    i++;
+                }
+                else
+                {
+                    if (len != 0)
+                    {
+                        len = lps[len - 1];
+                    }
+                    else
+                    {
                         lps[i] = len;
-                        i++;}
+                        i++;
+                    }
                 }
             }
         }
@@ -174,6 +197,7 @@ namespace nonepad
             {
                 idxPos = (idxPos - 1 + resultIndexes.Count) % resultIndexes.Count;
                 selectWord(idxPos);
+                updateCountLabel();
             }
         }
 
@@ -222,7 +246,7 @@ namespace nonepad
 
         }
 
-        private void highlightAllBox_CheckedChanged(object sender, EventArgs e)
+        protected void highlightAllBox_CheckedChanged(object sender, EventArgs e)
         {
             if (resultIndexes == null || resultIndexes.Count == 0)
                 return;
@@ -248,6 +272,11 @@ namespace nonepad
                 }
             }
             targetTextBox.Select(originalSelectionStart, originalSelectionLength);
+        }
+
+        protected void countLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

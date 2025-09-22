@@ -35,6 +35,7 @@
             nextButton = new Button();
             previousButton = new Button();
             highlightAllBox = new CheckBox();
+            countLabel = new Label();
             SuspendLayout();
             // 
             // searchBox
@@ -99,11 +100,21 @@
             highlightAllBox.UseVisualStyleBackColor = true;
             highlightAllBox.CheckedChanged += highlightAllBox_CheckedChanged;
             // 
+            // countLabel
+            // 
+            countLabel.AutoSize = true;
+            countLabel.Location = new Point(12, 42);
+            countLabel.Name = "countLabel";
+            countLabel.Size = new Size(0, 20);
+            countLabel.TabIndex = 8;
+            countLabel.Click += countLabel_Click;
+            // 
             // FindDialogue
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(739, 52);
+            ClientSize = new Size(739, 70);
+            Controls.Add(countLabel);
             Controls.Add(highlightAllBox);
             Controls.Add(previousButton);
             Controls.Add(nextButton);
@@ -132,5 +143,6 @@
         protected Button nextButton;
         protected Button previousButton;
         private CheckBox highlightAllBox;
+        protected Label countLabel;
     }
 }

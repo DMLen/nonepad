@@ -68,7 +68,7 @@ namespace nonepad
 
         protected void nextButton_Click(object sender, EventArgs e)
         {
-            if (resultIndexes != null)
+            if (resultIndexes != null && resultIndexes.Count > 0)
             {
                 idxPos = (idxPos + 1) % resultIndexes.Count;
                 selectWord(idxPos);
@@ -170,7 +170,7 @@ namespace nonepad
 
         protected void previousButton_Click(object sender, EventArgs e)
         {
-            if (resultIndexes != null)
+            if (resultIndexes != null && resultIndexes.Count > 0)
             {
                 idxPos = (idxPos - 1 + resultIndexes.Count) % resultIndexes.Count;
                 selectWord(idxPos);
